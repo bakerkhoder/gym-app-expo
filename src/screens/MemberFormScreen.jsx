@@ -9,6 +9,7 @@ export default function MemberFormScreen({ navigation, route }) {
   const editingMember = route.params?.member; // Check if a member object is passed for editing
 
   const [name, setName] = useState(editingMember?.name || '');
+  const [phone, setPhone] = useState(editingMember?.phone || '');
   const [subscriptionDate, setSubscriptionDate] = useState(
     editingMember?.subscriptionDate ? new Date(editingMember.subscriptionDate) : new Date()
   );
@@ -36,6 +37,7 @@ export default function MemberFormScreen({ navigation, route }) {
     const memberToSave = {
       id: editingMember?.id || Date.now().toString(), // Use existing ID or generate new
       name: name.trim(),
+      phone: phone.trim(),
       subscriptionDate: subscriptionDate.toISOString(), // Store as ISO string
     };
 
@@ -56,6 +58,15 @@ export default function MemberFormScreen({ navigation, route }) {
         placeholder="Enter member name"
         value={name}
         onChangeText={setName}
+      />
+
+      <Text style={styles.label}>Phone Number (for WhatsApp):</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="e.g. +96170123456"
+        keyboardType="phone-pad"
+        value={phone}
+        onChangeText={setPhone}
       />
 
       <Text style={styles.label}>Subscription Date:</Text>

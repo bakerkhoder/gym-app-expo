@@ -42,7 +42,7 @@ export const notificationService = {
 
       // Schedule notification for 9 AM on the due date
       let notificationTime = new Date(dueDate);
-      notificationTime.setHours(9, 0, 0, 0);
+     // notificationTime.setHours(9, 0, 0, 0);
 
       // FOR TESTING: Uncomment the line below to receive a notification in 60 seconds
       notificationTime = new Date(Date.now() + 60 * 1000);
