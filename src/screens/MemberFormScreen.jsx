@@ -3,7 +3,7 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, Platform } 
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { COLORS } from '../constants/colors';
 import { MemberService } from '../services/memberStore';
-
+import { notificationService } from '../services/nnotificationService';
 export default function MemberFormScreen({ navigation, route }) {
   /** @type {any} */
   const editingMember = route.params?.member; // Check if a member object is passed for editing
@@ -43,6 +43,7 @@ export default function MemberFormScreen({ navigation, route }) {
 
     const success = await MemberService.saveMember(memberToSave);
     if (success) {
+            await notificationService.schedulePaymentDueNotification(memberToSave);
       Alert.alert('Success', `Member ${editingMember ? 'updated' : 'added'} successfully!`);
       navigation.goBack(); // Go back to MembersScreen
     } else {
